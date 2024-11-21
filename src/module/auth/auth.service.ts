@@ -66,16 +66,16 @@ export const handleLogin = async (data: iLogin) => {
             email: user.email,
             role: user.role,
             username: user.username,
-            nama: user.nama,
+            nama: user.name,
         };
 
         const tokenData = { token, refreshToken };
 
         return { tokenData, userData };
 
-    } catch (error) {
+    } catch (error:any) {
         console.error("Login error:", error);
-        throw new Error( "An error occurred during login.");
+        throw new Error( error.message);
     }
 };
 
@@ -99,7 +99,7 @@ export const handleRegister = async ({ email, password, username, name }: iRegis
                 email,
                 password: hash,
                 username,
-                nama: name
+                name
             }
         });
 
@@ -111,12 +111,12 @@ export const handleRegister = async ({ email, password, username, name }: iRegis
             id: user.id,
             email: user.email,
             username: user.username,
-            name: user.nama,
+            name: user.name,
             role: user.role
         };
 
-    } catch (error) {
-        console.error("Registration error:", error);
-        throw new Error( "An error occurred during registration.");
+    } catch (error:any) {
+        console.error("Registration error:", error.message);
+        throw new Error( error.message);
     }
 };

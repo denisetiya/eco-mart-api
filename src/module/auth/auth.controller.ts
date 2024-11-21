@@ -31,9 +31,9 @@ auth.post('/login', async (c) => {
 
         return Res(c, 200, 'Login success', null, userData, tokenData);
 
-    } catch (error) {
-        console.error(error);
-        return Res(c, 500, 'Internal server error');
+    } catch (error:any) {
+        console.error(error.message);
+        return Res(c, 500, 'Internal server error', error.message);
     }
 });
 
@@ -48,8 +48,8 @@ auth.post('/register', async (c) => {
         }
 
         return Res(c, 200, 'Register success', null, user);
-    } catch (error) {
-        
+    } catch (error:any) {
+        return Res(c, 500, 'Some thing wrong', error.message);
     }
 })
 

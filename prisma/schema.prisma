@@ -13,24 +13,124 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String    @id @default(uuid()) @map("id")
-  nama      String
-  username  String    @unique
-  email     String    @unique
-  noHp      String?  
+  id        String        @id @default(uuid())
+  name      String
+  username  String        @unique
+  email     String        @unique
+  noHp      String?
   password  String
-  imgUrl    String?  
-  role      String    @default("user")
-  createdAt DateTime  @default(now()) @map("createdAt")
+  userImg   String?
+  role      String        @default("user")
+  createdAt DateTime      @default(now())
   token     Token[]
+  alamat    UserAddress[]
+  saller    Saller[]
+  order     Order[]
+  chat      Chat[]
+  review    Review[]
 }
 
 model Token {
-  refresh String @id 
-  userId   String @unique
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  refresh String @id
+  userId  String @unique
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model UserAddress {
+  id          String @id @default(uuid())
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  province    String
+  city        String
+  district    String
+  subDistrict String
+  detail      String
+}
+
+model Saller {
+  id             String          @id @default(uuid())
+  userId         String
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sallerName     String
+  sallerDesc     String
+  sallerImg      String?
+  sallerApproved Boolean         @default(false)
+  alamat         SallerAddress[]
+  chat           Chat[]
+  order          Order[]
+
+  Product Product[]
+}
+
+model SallerAddress {
+  id        String @id @default(uuid())
+  sallerId  String
+  saller    Saller @relation(fields: [sallerId], references: [id], onDelete: Cascade)
+  provinsi  String
+  kota      String
+  kecamatan String
+  kelurahan String
+  detail    String
+}
+
+model Order {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  cart      Boolean  @default(true)
+  Quantity  Int
+  Payment   Boolean  @default(false)
+  OrderDate DateTime @updatedAt
+  sallerId  String
+  saller    Saller   @relation(fields: [sallerId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id              String           @id @default(uuid())
+  sallerId        String
+  saller          Saller           @relation(fields: [sallerId], references: [id], onDelete: Cascade)
+  imgUrl          String
+  productName     String
+  productDesc     String
+  productPrice    Int
+  productStock    Int
+  productSold     Int
+  variant         ProductVariant[]
+  productCategory String
+  Orders          Order[]
+  review          Review[]
+  lastUpdate      DateTime         @updatedAt
+}
+
+model ProductVariant {
+  id         String  @id @default(uuid())
+  productId  String
+  product    Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  variant    String
+  stock      Int
+  variantImg String
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId  String
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  rating     Int
+  review     String
+  reviewDate DateTime @updatedAt
+}
+
+model Chat {
+  id       String   @id @default(uuid())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sallerId String
+  saller   Saller   @relation(fields: [sallerId], references: [id], onDelete: Cascade)
+  message  String
+  chatDate DateTime @updatedAt
+}

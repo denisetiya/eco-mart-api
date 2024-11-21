@@ -1,11 +1,12 @@
 import { serve } from '@hono/node-server'
-import { Hono } from 'hono'
+import { Hono, } from 'hono'
 import headerMiddleware from './middleware/header.middleware.js'
 import rateLimiter from './middleware/rate.limiter.js'
 import serverKey from './middleware/server.key.js'
 import { authenticateJWT } from './middleware/jwt.auth.js'
 import auth from './module/auth/auth.controller.js'
 import router from './router.js'
+
 
 const app = new Hono()
 

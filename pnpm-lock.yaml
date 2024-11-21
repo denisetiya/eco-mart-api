@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@hono/node-server':
         specifier: ^1.13.7
-        version: 1.13.7(hono@4.6.10)
+        version: 1.13.7(hono@4.6.11)
       '@prisma/client':
         specifier: ^5.22.0
         version: 5.22.0(prisma@5.22.0)
@@ -21,8 +21,8 @@ importers:
         specifier: ^16.4.5
         version: 16.4.5
       hono:
-        specifier: ^4.6.10
-        version: 4.6.10
+        specifier: ^4.6.11
+        version: 4.6.11
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
@@ -481,8 +481,8 @@ packages:
   has-unicode@2.0.1:
     resolution: {integrity: sha512-8Rf9Y83NBReMnx0gFzA8JImQACstCYWUplepDa9xprwwtmgEZUF0h/i5xSA625zB/I37EtrswSST6OXxwaaIJQ==}
 
-  hono@4.6.10:
-    resolution: {integrity: sha512-IXXNfRAZEahFnWBhUUlqKEGF9upeE6hZoRZszvNkyAz/CYp+iVbxm3viMvStlagRJohjlBRGOQ7f4jfcV0XMGg==}
+  hono@4.6.11:
+    resolution: {integrity: sha512-f0LwJQFKdUUrCUAVowxSvNCjyzI7ZLt8XWYU/EApyeq5FfOvHFarBaE5rjU9HTNFk4RI0FkdB2edb3p/7xZjzQ==}
     engines: {node: '>=16.9.0'}
 
   https-proxy-agent@5.0.1:
@@ -814,9 +814,9 @@ snapshots:
   '@esbuild/win32-x64@0.23.1':
     optional: true
 
-  '@hono/node-server@1.13.7(hono@4.6.10)':
+  '@hono/node-server@1.13.7(hono@4.6.11)':
     dependencies:
-      hono: 4.6.10
+      hono: 4.6.11
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:
@@ -1099,7 +1099,7 @@ snapshots:
 
   has-unicode@2.0.1: {}
 
-  hono@4.6.10: {}
+  hono@4.6.11: {}
 
   https-proxy-agent@5.0.1:
     dependencies:
